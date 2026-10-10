@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "sync-catalog": "node scripts/sync-catalog.mjs --pull",
     "sync-catalog:local": "node scripts/sync-catalog.mjs",
-    "check-catalog": "node scripts/sync-catalog.mjs"
+    "check-catalog": "node scripts/sync-catalog.mjs",
+    "setup-www-dns": "node scripts/setup-www-dns.mjs"}
   },
   "devDependencies": {
     "@nuxtjs/seo": "^5.3.0",
