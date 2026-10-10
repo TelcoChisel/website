@@ -25,20 +25,19 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-          cache: npm
+          # cache: npm disabled until a Linux-generated package-lock.json is committed
+          # (Windows lockfiles omit oxc linux bindings; see install step)
 
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: .nuxt/cache
-          key: ${{ runner.os }}-nuxt-${{ hashFiles('package-lock.json', 'catalog/tools.json', 'data/**', 'pages/**') }}
+          key: ${{ runner.os }}-nuxt-${{ hashFiles('package.json', 'catalog/tools.json', 'data/**', 'pages/**') }}
           restore-keys: |
             ${{ runner.os }}-nuxt-
 
-      # Windows-generated lockfiles omit Linux oxc native bindings (npm optional-deps bug).
+      # Fresh install on Linux so optional native bindings (oxc) resolve correctly.
       - name: Install dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install --no-fund --no-audit
+        run: npm install --no-fund --no-audit
 
       - name: Sync tool catalog from TelcoChiselOS
         run: npm run sync-catalog
