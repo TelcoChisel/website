@@ -1,4 +1,4 @@
-name: Deploy telcochisel.com
+﻿name: Deploy telcochisel.com
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
             ${{ runner.os }}-nuxt-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Sync tool catalog from TelcoChiselOS
         run: npm run sync-catalog
@@ -74,3 +74,4 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
